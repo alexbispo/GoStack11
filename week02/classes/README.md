@@ -48,3 +48,23 @@ To configure eslint, execute yarn eslint --init and choose the options taht make
   - To configure preetier use prettier.config.js
 
   - To avoid eslint to check unecessary files, edit .eslintignore.
+
+## Docker
+
+  commands:
+
+    $ docker run --name <container_name> -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+
+    $ docker logs <container_name>
+
+    $ docker stop <container_name>
+
+    $ docker start <container_name>
+
+## TypeORM
+
+  - Remember to install the database driver.
+
+  - Remember to configure tsconfig.json to use experimental options.
+
+  - Rememeber to create a new script at package.json to execute cli.js.
