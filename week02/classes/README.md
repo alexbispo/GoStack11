@@ -68,3 +68,5 @@ To configure eslint, execute yarn eslint --init and choose the options taht make
   - Remember to configure tsconfig.json to use experimental options.
 
   - Rememeber to create a new script at package.json to execute cli.js.
+
+  - Remember to install reflect-metadata
