@@ -6,12 +6,12 @@ import Appointment from '../models/Appointment';
 
 interface CreateAppointmentRequestDto {
   date: Date;
-  provider: string;
+  providerId: string;
 }
 
 class CreateAppointmentService {
   public async execute({
-    provider,
+    providerId,
     date,
   }: CreateAppointmentRequestDto): Promise<Appointment> {
     const startedDate = startOfHour(date);
@@ -27,7 +27,7 @@ class CreateAppointmentService {
     }
 
     const appointment = appointmentsRepository.create({
-      provider,
+      providerId,
       date: startedDate,
     });
 

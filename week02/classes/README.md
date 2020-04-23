@@ -22,6 +22,8 @@ To create a new backend project:
 
     $ yarn add prettier eslint-config-prettier eslint-plugin-prettier -D
 
+    $ yarn add @typescript-eslint/eslint-plugin@latest eslint-config-airbnb-base@latest eslint-plugin-import@^2.20.1 @typescript-eslint/parser@latest
+
 Is important edit tsconfig to configure the out dir and root dir.
 
 ts-node-dev: Is a kind of mix between nodemon and tsc utilities, it watches and traspiles ower code.
@@ -70,3 +72,7 @@ To configure eslint, execute yarn eslint --init and choose the options taht make
   - Rememeber to create a new script at package.json to execute cli.js.
 
   - Remember to install reflect-metadata
+
+## Utils
+  - yard add bcryptjs --> to encrypt passwords.
+    - yarn add @types/bcryptjs -D --> to add ts types.
