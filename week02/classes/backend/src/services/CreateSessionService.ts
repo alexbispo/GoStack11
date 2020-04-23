@@ -1,5 +1,6 @@
 import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 import User from '../models/User';
 
 interface CreateSessionRequestDto {
@@ -10,6 +11,7 @@ interface CreateSessionRequestDto {
 
 interface CreateSessionResponseDto {
   user: User;
+  token: string;
 }
 
 class CreateSessionService {
@@ -31,7 +33,14 @@ class CreateSessionService {
       throw new Error('Email/password invalid.');
     }
 
-    return { user: findUser };
+    // secret
+    // 9f258fda0b0edee6f1a4578d15a4a526
+    const token = sign({}, '9f258fda0b0edee6f1a4578d15a4a526', {
+      subject: findUser.id,
+      expiresIn: '1d',
+    });
+
+    return { user: findUser, token };
   }
 }
 
