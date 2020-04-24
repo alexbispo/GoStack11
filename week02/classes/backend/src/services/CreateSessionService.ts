@@ -3,6 +3,7 @@ import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import User from '../models/User';
 import configAuth from '../config/auth';
+import AppError from '../errors/AppError';
 
 interface CreateSessionRequestDto {
   email: string;
@@ -25,13 +26,13 @@ class CreateSessionService {
     const findUser = await usersRepository.findOne({ where: { email } });
 
     if (!findUser) {
-      throw new Error('Email/password invalid.');
+      throw new AppError('Email/password invalid.');
     }
 
     const validPassword = await compare(password, findUser.password);
 
     if (!validPassword) {
-      throw new Error('Email/password invalid.');
+      throw new AppError('Email/password invalid.');
     }
 
     const { secret, expiresIn } = configAuth.jwt;

@@ -8,19 +8,15 @@ import UpdateUserAvatarService from '../services/UpdateUserAvatarService';
 const usersRoutes = Router();
 
 usersRoutes.post('/', async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
+  const { name, email, password } = req.body;
 
-    const createUserService = new CreateUserService();
+  const createUserService = new CreateUserService();
 
-    const newUser = await createUserService.execute({ name, email, password });
+  const newUser = await createUserService.execute({ name, email, password });
 
-    delete newUser.password;
+  delete newUser.password;
 
-    return res.json(newUser);
-  } catch (error) {
-    return res.status(400).json({ error: error.message });
-  }
+  return res.json(newUser);
 });
 
 const upload = multer(configUpload);
@@ -30,20 +26,16 @@ usersRoutes.patch(
   ensureAuthenticated,
   upload.single('avatar'),
   async (req, res) => {
-    try {
-      const updateUserAvatarService = new UpdateUserAvatarService();
+    const updateUserAvatarService = new UpdateUserAvatarService();
 
-      const user = await updateUserAvatarService.execute({
-        userId: req.user.id,
-        avatarFileName: req.file.filename,
-      });
+    const user = await updateUserAvatarService.execute({
+      userId: req.user.id,
+      avatarFileName: req.file.filename,
+    });
 
-      delete user.password;
+    delete user.password;
 
-      return res.json(user);
-    } catch (error) {
-      return res.status(400).json({ error: error.message });
-    }
+    return res.json(user);
   },
 );
 

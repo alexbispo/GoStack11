@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
 import configAuth from '../config/auth';
+import AppError from '../errors/AppError';
 
 interface TokenDecoded {
   iat: number;
@@ -18,8 +19,7 @@ export default function endureAutehenticated(
   const { authorization } = req.headers;
 
   if (!authorization) {
-    res.status(401).json({ error: 'JWT token missing.' });
-    return;
+    throw new AppError('JWT token missing.', 401);
   }
 
   try {
@@ -32,6 +32,6 @@ export default function endureAutehenticated(
 
     next();
   } catch {
-    res.status(401).json({ error: 'Invalid JWT token.' });
+    throw new AppError('Invalid JWT token.', 401);
   }
 }
