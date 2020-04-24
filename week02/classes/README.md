@@ -51,6 +51,9 @@ To configure eslint, execute yarn eslint --init and choose the options taht make
 
   - To avoid eslint to check unecessary files, edit .eslintignore.
 
+## Power Shell
+    $ Get-Process -Id (Get-NetTCPConnection -LocalPort 5432).OwningProcess
+
 ## Docker
 
   commands:
@@ -76,3 +79,8 @@ To configure eslint, execute yarn eslint --init and choose the options taht make
 ## Utils
   - yard add bcryptjs --> to encrypt passwords.
     - yarn add @types/bcryptjs -D --> to add ts types.
+
+## Save avatar image
+  - save just the path in the database.
+  - the image nust be saved in disk or in some cloud storage service like DigitalOcean, etc...
+  - a sugestion about wich lib to use multer.
