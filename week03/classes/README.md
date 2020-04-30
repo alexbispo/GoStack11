@@ -37,5 +37,9 @@
 
   - @types/styled-components -D
 
+  - polished
+
+  - react-icons
+
 ### Editor plugins
   - styled-components
