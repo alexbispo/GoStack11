@@ -24,5 +24,18 @@
 
 ### libs
   - eslint -D
+  
   - eslint-import-resolver-typescript -D
+  
   - prettier eslint-config-prettier eslint-plugin-prettier -D
+
+  - react-router-dom
+
+  - @types/react-router-dom -D
+
+  - styled-components
+
+  - @types/styled-components -D
+
+### Editor plugins
+  - styled-components
