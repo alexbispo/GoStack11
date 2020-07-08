@@ -1,3 +1,4 @@
+import { injectable, inject } from 'tsyringe';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import configAuth from '@config/auth';
@@ -6,8 +7,11 @@ import IUsersRepository from '../repositories/IUsersRepository';
 import ICreateSessionDTO from '../dtos/ICreateSessionDTO';
 import ISessionCreatedDTO from '../dtos/ISessionCreatedDTO';
 
+@injectable()
 class CreateSessionService {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository') private usersRepository: IUsersRepository,
+  ) {}
 
   public async execute({
     email,

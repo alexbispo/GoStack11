@@ -1,3 +1,4 @@
+import { injectable, inject } from 'tsyringe';
 import path from 'path';
 import fs from 'fs';
 import configUpload from '@config/upload';
@@ -6,8 +7,11 @@ import IUpdateUserAvatarDTO from '../dtos/IUpdateUserAvatarDTO';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IUserAvatarUpdatedDTO from '../dtos/IUserAvatarUpdatedDTO';
 
+@injectable()
 export default class UpdateUserAvatarService {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository') private usersRepository: IUsersRepository,
+  ) {}
 
   public async execute({
     userId,

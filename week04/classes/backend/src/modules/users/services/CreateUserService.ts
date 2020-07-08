@@ -1,11 +1,15 @@
+import { injectable, inject } from 'tsyringe';
 import { hash } from 'bcryptjs';
 import AppError from '@shared/errors/AppError';
 import ICreateUserDTO from '../dtos/ICreateUserDTO';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IUserCreatedDTO from '../dtos/IUserCreatedDTO';
 
+@injectable()
 export default class CreateUserService {
-  constructor(private usersRepository: IUsersRepository) {}
+  constructor(
+    @inject('UsersRepository') private usersRepository: IUsersRepository,
+  ) {}
 
   public async execute({
     name,
