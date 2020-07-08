@@ -3,7 +3,7 @@ import { verify } from 'jsonwebtoken';
 import configAuth from '@config/auth';
 import AppError from '@shared/errors/AppError';
 
-interface TokenDecoded {
+interface ITokenDecoded {
   iat: number;
 
   exp: number;
@@ -26,7 +26,7 @@ export default function endureAutehenticated(
     const [, token] = authorization.split(' ');
     const decoded = verify(token, configAuth.jwt.secret);
 
-    const { sub } = decoded as TokenDecoded;
+    const { sub } = decoded as ITokenDecoded;
 
     req.user = { id: sub };
 

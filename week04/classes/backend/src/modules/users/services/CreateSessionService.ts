@@ -1,29 +1,19 @@
-import { getRepository } from 'typeorm';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import User from '@modules/users/infra/typeorm/entities/User';
 import configAuth from '@config/auth';
 import AppError from '@shared/errors/AppError';
-
-interface CreateSessionRequestDto {
-  email: string;
-
-  password: string;
-}
-
-interface CreateSessionResponseDto {
-  user: User;
-  token: string;
-}
+import IUsersRepository from '../repositories/IUsersRepository';
+import ICreateSessionDTO from '../dtos/ICreateSessionDTO';
+import ISessionCreatedDTO from '../dtos/ISessionCreatedDTO';
 
 class CreateSessionService {
+  constructor(private usersRepository: IUsersRepository) {}
+
   public async execute({
     email,
     password,
-  }: CreateSessionRequestDto): Promise<CreateSessionResponseDto> {
-    const usersRepository = getRepository(User);
-
-    const findUser = await usersRepository.findOne({ where: { email } });
+  }: ICreateSessionDTO): Promise<ISessionCreatedDTO> {
+    const findUser = await this.usersRepository.findByEmail(email);
 
     if (!findUser) {
       throw new AppError('Email/password invalid.');
